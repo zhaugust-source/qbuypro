@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+<!-- 商品陈列 -->
+{% block a %}
+  <div class="nav-links">
+    <a href="#shop" data-cat="all">全部灵器</a>
+    <a href="#shop" data-cat="0">玉 瓷</a>
+    <a href="#shop" data-cat="1">法 灯</a>
+    <a href="#shop" data-cat="2">云 锦</a>
+    <a href="#shop" data-cat="3">香 篆</a>
+    <a href="#philosophy">品 牌</a>
+  </div>
+  <button class="bag-btn" id="bagBtn" aria-label="打开购物袋">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 8h12l1 13H5L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    <span>购物袋</span>
+    <span class="bag-count" id="bagCount">0</span>
+  </button>
+{% endblock %}
+
+<!-- 数据来源 -->
+{% block data %}
+	{{ goods_json|json_script:"goods-data" }}
+	<!-- 抢购接口地址与 CSRF 令牌，"0" 为占位 id，前端按商品 id 替换 -->
+	<div id="qbuyConfig" hidden
+	     data-init-url="{% url 'active:qbuy' '0' %}"
+	     data-poll-url="{% url 'active:query_qbuy' '0' %}">
+	  {% csrf_token %}
+	</div>
+{% endblock %}
+
+{% block order %}
+    <div class="hero-actions">
+      <a class="btn-outline" href="#shop">
+        <span>开始选购</span>
+        <svg width="16" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 6h18M13 1l5 5-5 5"/></svg>
+      </a>
+    </div>
+{% endblock %}
+
+<!-- 商品陈列 -->
+{% block shop %}
+    <section class="shop" id="shop">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">COLLECTION · 本季选品</div>
+          <h2>器物陈列</h2>
+        </div>
+        <div class="filters" id="filters">
+          <button class="active" data-cat="all">全部</button>
+            {% for c in cats %}
+                <button data-cat="{{ c.value }}">{{ c.name }}</button>
+            {% endfor %}
+        </div>
+      </div>
+      <div class="qbuy-banner reveal">
+        <span class="qb-live"></span>
+        <span class="qb-title">{{ active.title }}</span>
+        <span class="qb-time">{{ active.start_time }} — {{ active.end_time }}</span>
+        <span class="qb-note">每日限量 5 件 · 每人限抢 1 件</span>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+{% endblock %}
+
+<!-- 购物袋抽屉 -->
+{% block drawer %}
+    <aside class="drawer" id="drawer" aria-label="购物袋">
+      <div class="drawer-head">
+        <h3>购物袋</h3>
+        <button class="icon-btn" id="drawerClose" aria-label="关闭">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 5l14 14M19 5L5 19"/></svg>
+        </button>
+      </div>
+      <div class="drawer-body" id="drawerBody"></div>
+      <div class="drawer-foot" id="drawerFoot" style="display:none">
+        <div class="total-row"><span>合 计</span><b id="cartTotal">¥ 0</b></div>
+        <button class="btn-solid" id="checkoutBtn">递 交 订 单</button>
+      </div>
+    </aside>
+{% endblock %}
+
+<!-- 快速预览模态 -->
+{% block modal %}
+	<div class="modal-wrap" id="modalWrap">
+      <div class="modal" id="modal"></div>
+    </div>
+{% endblock %}
+
+<!-- 品牌展示 -->
+{% block logo %}
+    <section class="philosophy" id="philosophy">
+  <div class="reveal">
+    <blockquote>
+      「一件好的器物，<br>
+      不必被凝视，<br>
+      只需被<em>长久地使用</em>——<br>
+      它会在岁月里，慢慢长成你的样子。」
+    </blockquote>
+    <div class="attr">—— 灵器选品札记 · 卷一</div>
+  </div>
+  <div class="tenets reveal">
+    <div class="tenet">
+      <span class="no">i.</span>
+      <div><h4>手作温度</h4><p>每一件都出自独立匠人之手，留有细微的不规则，那是机器无法复制的呼吸感。</p></div>
+    </div>
+    <div class="tenet">
+      <span class="no">ii.</span>
+      <div><h4>少而持久</h4><p>我们不做季节性的流行款，只做可以用十年、传给下一代的日常之物。</p></div>
+    </div>
+    <div class="tenet">
+      <span class="no">iii.</span>
+      <div><h4>源头直采</h4><p>跳过所有中间环节，与工坊直接合作，让合理的价钱回到手艺人手中。</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+<!-- 购物foot -->
+{% block foot_goods %}
+    <div class="foot-col">
+      <h5>选 购</h5>
+      <a href="#shop" data-cat="all">全部器物</a>
+      <a href="#shop" data-cat="0">玉瓷</a>
+      <a href="#shop" data-cat="1">法灯</a>
+      <a href="#shop" data-cat="2">云锦</a>
+      <a href="#shop" data-cat="3">香篆</a>
+    </div>
+{% endblock %}

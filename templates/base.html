@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>灵器 LINGQI · 手作器物买手店</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+{% block data %}{% endblock %}
+
+<!-- 导航 -->
+<nav id="nav">
+  <a class="brand" href="#top">灵器<em>LINGQI</em></a>
+    {% block a %}{% endblock %}
+
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="top">
+  <div class="hero-copy">
+    <div class="eyebrow">EST. 2024 · 手作器物买手店</div>
+    <h1>
+      <span class="l">以器物，</span>
+      <span class="l">安顿<em>日常</em>。</span>
+    </h1>
+    <p class="sub">我们走访十余处窑口与工坊，只挑选经得起时间的手作之物——粗糙的陶、温润的木、安静的布。它们不喧哗，却让日子有了质地。</p>
+
+      {% block order %}{% endblock %}
+
+  </div>
+  <div class="hero-art">
+    <div class="ph ph-a"><img src="https://picsum.photos/seed/shiqi-hero-a/720/960.jpg" alt="器物陈列"></div>
+    <div class="ph ph-b"><img src="https://picsum.photos/seed/shiqi-hero-b/600/750.jpg" alt="器物细节"></div>
+    <div class="ph-tag">Quiet Objects, Lasting Life</div>
+  </div>
+  <div class="hero-foot">向下探索</div>
+</header>
+
+<!-- 滚动文字带 -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- 商品陈列 -->
+{% block shop %}{% endblock %}
+
+
+<!-- 品牌宣言 -->
+{% block logo %}{% endblock %}
+
+
+<!-- 页脚 -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <div class="brand">灵器<em>LINGQI</em></div>
+      <p>一间安静的手作器物买手店。<br>周一至周日 10:00 – 21:00<br>杭州市天目里 17 号楼一层</p>
+    </div>
+    {% block foot_goods %}{% endblock %}
+    <div class="foot-col">
+      <h5>关 于</h5>
+      <a href="#philosophy">品牌理念</a>
+      <a href="#philosophy">匠人工坊</a>
+      <a href="#top">退换说明</a>
+      <a href="#top">联系我们</a>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span>© <span id="year"></span> 灵器 LINGQI · 手作器物买手店</span>
+    <span>SLOW LIVING, WELL MADE</span>
+  </div>
+</footer>
+
+<!-- 遮罩 -->
+<div class="overlay" id="overlay"></div>
+
+<!-- 购物袋抽屉 -->
+{% block drawer %}{% endblock %}
+
+
+<!-- 快速预览模态 -->
+{% block modal %}{% endblock %}
+
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12l5 5L20 6"/></svg>
+  <span id="toastMsg"></span>
+</div>
+
+<script src="{% static 'js/base.js' %}"></script>
+</body>
+</html>
