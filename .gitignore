@@ -1,4 +1,21 @@
+# 依赖
 node_modules/
+venv/
+.venv/
+
+# 构建产物
+dist/
+build/
 target/
+*.class
+*.jar
+
+# 日志和临时文件
 *.log
+.DS_Store
+Thumbs.db
+
+# 环境变量和密钥
 .env
+.env.local
+*.pem
